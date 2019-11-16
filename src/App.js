@@ -1,14 +1,23 @@
 import React from "react";
+
+import Header from "./Header";
 import Cell from "./Cell";
 
 import "./App.css";
 
 function App() {
-  const [cells, setCells] = React.useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const initialBoard = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const [cells, setCells] = React.useState([...initialBoard]);
+  const [turn, setTurn] = React.useState(1);
+
   const cellSelect = i => {
     const newCells = [...cells];
-    newCells[i] = newCells[i] === 0 ? 1 : newCells[i] === 1 ? 2 : 0;
+
+    if (newCells[i] !== 0) return;
+
+    newCells[i] = turn + 1;
     setCells(newCells);
+    setTurn((turn + 1) % 2);
   };
 
   const cellEls = cells.map((cell, i) => (
@@ -17,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <Header />
       <div className="board">{cellEls}</div>
     </div>
   );
