@@ -10,7 +10,7 @@ function App() {
   const [cells, setCells] = React.useState([...initialBoard]);
   const [turn, setTurn] = React.useState(1);
 
-  const cellSelect = i => {
+  function cellSelect(i) {
     const newCells = [...cells];
 
     if (newCells[i] !== 0) return;
@@ -18,7 +18,12 @@ function App() {
     newCells[i] = turn + 1;
     setCells(newCells);
     setTurn((turn + 1) % 2);
-  };
+  }
+
+  function resetGame() {
+    setCells([...initialBoard]);
+    setTurn(1);
+  }
 
   const cellEls = cells.map((cell, i) => (
     <Cell key={i} index={i} value={cell} cellSelect={cellSelect} />
@@ -26,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header resetGame={resetGame} />
       <div className="board">{cellEls}</div>
     </div>
   );
