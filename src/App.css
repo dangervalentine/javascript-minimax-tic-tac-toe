@@ -12,11 +12,6 @@ body {
   color: white;
 }
 
-.App {
-  text-align: center;
-  height: 100vh;
-  width: 100vw;
-}
 header {
   padding: 5px 5px 10px;
   display: flex;
@@ -83,14 +78,13 @@ header {
 .board {
   display: flex;
   flex-wrap: wrap;
-  height: 70vh;
-  width: 70vh;
-  margin: 5% auto;
+  height: 65vh;
+  width: 65vh;
+  margin: 2% auto 0;
 }
 
 .cell {
   position: relative;
-  cursor: pointer;
   border: 3px solid #aaa;
   height: 33.33%;
   width: 33.33%;
@@ -98,7 +92,7 @@ header {
   user-select: none;
 }
 
-.cell.to-top-left {
+.cell.DR {
   background: linear-gradient(
     to top left,
     rgba(0, 0, 0, 0) 0%,
@@ -110,7 +104,7 @@ header {
     rgba(0, 0, 0, 0) 100%
   );
 }
-.cell.to-top-right {
+.cell.DL {
   background: linear-gradient(
     to top right,
     rgba(0, 0, 0, 0) 0%,
@@ -122,7 +116,7 @@ header {
     rgba(0, 0, 0, 0) 100%
   );
 }
-.cell.to-top {
+.cell.H {
   background: linear-gradient(
     to top,
     rgba(0, 0, 0, 0) 0%,
@@ -134,7 +128,7 @@ header {
     rgba(0, 0, 0, 0) 100%
   );
 }
-.cell.to-right {
+.cell.V {
   background: linear-gradient(
     to right,
     rgba(0, 0, 0, 0) 0%,
@@ -167,8 +161,9 @@ header {
   border-bottom: none;
 }
 
-.cell:hover {
+.board.active .cell:hover {
   background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
 }
 
 .cell span {
@@ -177,8 +172,8 @@ header {
 
 .cell span.ex {
   position: absolute;
-  top: -25%;
-  left: 17.5%;
+  top: -32.5%;
+  left: 14%;
   color: aqua;
   font-size: 22vh;
 }
@@ -187,6 +182,15 @@ header {
   position: absolute;
   left: 22.5%;
   color: fuchsia;
+}
+
+.result {
+  color: red;
+  text-align: center;
+  width: 100%;
+  font-size: 4rem;
+  margin-top: 5%;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -211,77 +215,19 @@ header {
   header {
     justify-content: space-between;
   }
-
-  .cell {
-    border: 2px solid #aaa;
-  }
 }
 
 @media (max-width: 576px) {
-  .cell {
-    border: 1px solid #aaa;
-  }
-  .cell.to-top-left {
-    background: linear-gradient(
-      to top left,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) calc(50% - 2px),
-      rgba(70%, 70%, 70%, 1) calc(50% - 1px),
-      rgba(70%, 70%, 70%, 1) 50%,
-      rgba(70%, 70%, 70%, 1) calc(50% + 1px),
-      rgba(0, 0, 0, 0) calc(50% + 2px),
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
-  .cell.to-top-right {
-    background: linear-gradient(
-      to top right,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) calc(50% - 2px),
-      rgba(70%, 70%, 70%, 1) calc(50% - 1px),
-      rgba(70%, 70%, 70%, 1) 50%,
-      rgba(70%, 70%, 70%, 1) calc(50% + 1px),
-      rgba(0, 0, 0, 0) calc(50% + 2px),
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
-  .cell.to-top {
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) calc(50% - 2px),
-      rgba(70%, 70%, 70%, 1) calc(50% - 1px),
-      rgba(70%, 70%, 70%, 1) 50%,
-      rgba(70%, 70%, 70%, 1) calc(50% + 1px),
-      rgba(0, 0, 0, 0) calc(50% + 2px),
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
-  .cell.to-right {
-    background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) calc(50% - 2px),
-      rgba(70%, 70%, 70%, 1) calc(50% - 1px),
-      rgba(70%, 70%, 70%, 1) 50%,
-      rgba(70%, 70%, 70%, 1) calc(50% + 1px),
-      rgba(0, 0, 0, 0) calc(50% + 2px),
-      rgba(0, 0, 0, 0) 100%
-    );
-  }
-
   .cell span.ex {
     position: absolute;
-    top: -45%;
+    top: -47.5%;
     left: 7.5%;
-    color: aqua;
-    font-size: 22vh;
+    font-size: 20vh;
   }
 
   .cell span.oh {
     position: absolute;
-    top: -12.5%;
-    left: 15%;
-    color: fuchsia;
+    top: -20%;
+    left: 10%;
   }
 }
