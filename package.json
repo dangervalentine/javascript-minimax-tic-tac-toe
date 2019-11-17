@@ -15,7 +15,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://github.com/victoriousj/javascript-minimax-tic-tac-toe",
+  "homepage": "http://victoriousj.github.io/javascript-minimax-tic-tac-toe",
   "eslintConfig": {
     "extends": "react-app"
   },

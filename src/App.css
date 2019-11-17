@@ -90,6 +90,9 @@ header {
   width: 33.33%;
   font-size: 15vh;
   user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cell.DR {
@@ -172,16 +175,18 @@ header {
 
 .cell span.ex {
   position: absolute;
-  top: -32.5%;
-  left: 14%;
-  color: aqua;
-  font-size: 22vh;
+  height: 50%;
+  width: 50%;
+  background-image: url(./ex.svg);
+  background-size: cover;
 }
 
 .cell span.oh {
   position: absolute;
-  left: 22.5%;
-  color: fuchsia;
+  height: 50%;
+  width: 50%;
+  background-image: url(./oh.svg);
+  background-size: cover;
 }
 
 .result {
@@ -214,20 +219,5 @@ header {
 
   header {
     justify-content: space-between;
-  }
-}
-
-@media (max-width: 576px) {
-  .cell span.ex {
-    position: absolute;
-    top: -47.5%;
-    left: 7.5%;
-    font-size: 20vh;
-  }
-
-  .cell span.oh {
-    position: absolute;
-    top: -20%;
-    left: 10%;
   }
 }
