@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/victoriousj/javascript-minimax-tic-tac-toe/static/css/main.d3199eb6.chunk.css",
+    "main.js": "/victoriousj/javascript-minimax-tic-tac-toe/static/js/main.d592fade.chunk.js",
+    "main.js.map": "/victoriousj/javascript-minimax-tic-tac-toe/static/js/main.d592fade.chunk.js.map",
+    "runtime-main.js": "/victoriousj/javascript-minimax-tic-tac-toe/static/js/runtime-main.f03c7cec.js",
+    "runtime-main.js.map": "/victoriousj/javascript-minimax-tic-tac-toe/static/js/runtime-main.f03c7cec.js.map",
+    "static/js/2.1bf2a11d.chunk.js": "/victoriousj/javascript-minimax-tic-tac-toe/static/js/2.1bf2a11d.chunk.js",
+    "static/js/2.1bf2a11d.chunk.js.map": "/victoriousj/javascript-minimax-tic-tac-toe/static/js/2.1bf2a11d.chunk.js.map",
+    "index.html": "/victoriousj/javascript-minimax-tic-tac-toe/index.html",
+    "precache-manifest.b7f761a82e9a0b6cee589962f2158168.js": "/victoriousj/javascript-minimax-tic-tac-toe/precache-manifest.b7f761a82e9a0b6cee589962f2158168.js",
+    "service-worker.js": "/victoriousj/javascript-minimax-tic-tac-toe/service-worker.js",
+    "static/css/main.d3199eb6.chunk.css.map": "/victoriousj/javascript-minimax-tic-tac-toe/static/css/main.d3199eb6.chunk.css.map",
+    "static/media/logo.svg": "/victoriousj/javascript-minimax-tic-tac-toe/static/media/logo.6462638f.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f03c7cec.js",
+    "static/js/2.1bf2a11d.chunk.js",
+    "static/css/main.d3199eb6.chunk.css",
+    "static/js/main.d592fade.chunk.js"
+  ]
+}
