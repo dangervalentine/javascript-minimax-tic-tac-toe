@@ -3,11 +3,12 @@ import React from "react";
 import Header from "./Header";
 import Cell from "./Cell";
 
-import { initialBoard, isTerminal, getBestMove } from "./helper";
+import { initialBoard, boardHelper } from "./helper";
 import "./App.css";
 
 function App() {
   const [state, setState] = React.useState({ ...initialState });
+  const bHelper = new boardHelper();
 
   function insert(i) {
     let newCells = [...state.cells];
@@ -20,7 +21,7 @@ function App() {
       turn: (state.turn + 1) % 2
     }));
 
-    const updateObj = isTerminal(newCells);
+    const updateObj = bHelper.isTerminal(newCells);
     if (updateObj) {
       setState(prevState => ({
         ...prevState,
@@ -38,7 +39,8 @@ function App() {
   });
 
   function enemyGo(newCells) {
-    let i = getBestMove(newCells, false);
+    const bHelper = new boardHelper(state.difficulty);
+    let i = bHelper.getBestMove(newCells, false);
     if (newCells[i] !== 0 || !state.isPlaying) return;
 
     newCells[i] = state.turn + 1;
@@ -48,7 +50,7 @@ function App() {
       turn: (state.turn + 1) % 2
     }));
 
-    const updateObj = isTerminal(newCells);
+    const updateObj = bHelper.isTerminal(newCells);
     if (updateObj) {
       setState(prevState => ({
         ...prevState,
@@ -61,12 +63,24 @@ function App() {
   }
 
   function resetGame() {
-    setState({ ...initialState });
+    setState(prevState => ({
+      ...initialState,
+      difficulty: prevState.difficulty
+    }));
+  }
+
+  function toggleDifficulty() {
+    const newDifficulty = (state.difficulty + 1) % 2;
+    setState(prevState => ({ ...prevState, difficulty: newDifficulty }));
   }
 
   return (
     <div>
-      <Header resetGame={resetGame} />
+      <Header
+        resetGame={resetGame}
+        toggleDifficulty={toggleDifficulty}
+        difficulty={state.difficulty}
+      />
       <div className={`board ${state.isPlaying ? "active" : ""}`}>
         {state.cells.map((cell, i) => (
           <Cell
@@ -88,6 +102,7 @@ const initialState = {
   winningPeices: [],
   cells: initialBoard,
   isPlaying: true,
+  difficulty: 0,
   winner: "",
   turn: 0
 };

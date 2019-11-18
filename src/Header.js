@@ -1,6 +1,7 @@
 import React from "react";
 
 import logo from "./logo.svg";
+import difficultyImg from "./difficulty.svg";
 
 function Header(props) {
   return (
@@ -19,7 +20,19 @@ function Header(props) {
           </a>
         </div>
       </div>
-      <div>
+      <div className="header-buttons">
+        <button
+          onClick={() => props.toggleDifficulty()}
+          className="difficulty-button"
+        >
+          <img
+            src={difficultyImg}
+            style={{
+              transform: `translateX(${props.difficulty ? "-" : ""}24px)`
+            }}
+            alt="difficulty"
+          />
+        </button>
         <button onClick={() => props.resetGame()} className="reset-button">
           reset ↺
         </button>

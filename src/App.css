@@ -57,6 +57,10 @@ header {
   width: 50px;
 }
 
+.header-buttons {
+  display: flex;
+}
+
 .reset-button {
   border-radius: 5px;
   border: 1px solid white;
@@ -68,11 +72,31 @@ header {
   justify-content: center;
   background-color: transparent;
   color: white;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.reset-button:hover {
-  background-color: white;
-  color: #1a1b1c;
+.difficulty-button {
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid white;
+  margin-right: 5px;
+  width: 50px;
+  overflow: hidden;
+}
+
+.difficulty-button div {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: transparent;
+  height: 48px;
+  background-image: url(./difficulty.svg);
+  width: 96px;
 }
 
 .board {

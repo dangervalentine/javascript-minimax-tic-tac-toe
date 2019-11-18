@@ -9,7 +9,7 @@ function Cell(props) {
   return (
     <div
       className={`cell ${props.winningPeice ? props.winningAlignment : ""}`}
-      onClick={() => props.insert(props.index, true)}
+      onClick={() => props.insert(props.index)}
     >
       <span
         style={{ backgroundImage: `url(${background})` }}
