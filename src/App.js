@@ -62,6 +62,12 @@ function App() {
     }
   }
 
+  function isBoardFull() {
+    if (!state.isPlaying) {
+      resetGame();
+    }
+  }
+
   function resetGame() {
     setState(prevState => ({
       ...initialState,
@@ -81,7 +87,10 @@ function App() {
         toggleDifficulty={toggleDifficulty}
         difficulty={state.difficulty}
       />
-      <div className={`board ${state.isPlaying ? "active" : ""}`}>
+      <div
+        onClick={() => isBoardFull()}
+        className={`board ${state.isPlaying ? "active" : ""}`}
+      >
         {state.cells.map((cell, i) => (
           <Cell
             key={i}
