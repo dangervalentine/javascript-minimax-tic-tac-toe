@@ -2,6 +2,7 @@ import React from "react";
 
 import Header from "./Header";
 import Board from "./Board";
+import { GithubAttribution } from "./GithubAttribution";
 
 import { initialBoard, boardHelper } from "./helper";
 import { AI_MOVE_DELAY } from "./motion";
@@ -132,6 +133,8 @@ function App() {
         onInsert={insert}
         onReset={resetGame}
       />
+
+      <GithubAttribution />
     </div>
   );
 }

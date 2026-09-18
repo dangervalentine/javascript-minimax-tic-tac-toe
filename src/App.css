@@ -435,3 +435,44 @@ header {
 .credit p {
   white-space: nowrap;
 }
+
+/* ---- github attribution ---------------------------------------------- */
+
+/* Matches the badge used across the sibling projects, with the palette
+   tokens mapped onto this app's --nowl-* set. */
+.github-attribution {
+  position: fixed;
+  bottom: 0.85rem;
+  right: 1rem;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  background: var(--nowl-bg-elevated);
+  color: var(--nowl-text-secondary);
+  border: 1px solid var(--nowl-dark-gray);
+  border-radius: 999px;
+  font-family: system-ui, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.github-attribution:hover {
+  background: var(--nowl-dark-gray);
+  color: var(--nowl-cyan);
+  border-color: var(--nowl-cyan);
+}
+
+.github-attribution:focus-visible {
+  outline: 2px solid var(--nowl-cyan);
+  outline-offset: 2px;
+}
+
+.github-attribution-icon {
+  font-size: 1.1em;
+  line-height: 1;
+}
