@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import logo from "./logo.svg";
 import ResetButton from "./ResetButton";
 import SegmentedToggle from "./SegmentedToggle";
-import { INTRO, THINKING_PULSE } from "./motion";
+import { INTRO, THINKING_PULSE, MARK_SPRING } from "./motion";
 
 const MODE_OPTIONS = [
   { value: "cpu", label: "VS CPU" },
@@ -70,6 +70,7 @@ export default function Header({
 
       <div className="header-buttons">
         <SegmentedToggle
+          className="mode-toggle"
           layoutId="mode-thumb"
           ariaLabel="Opponent"
           options={MODE_OPTIONS}
@@ -77,15 +78,19 @@ export default function Header({
           onChange={onModeChange}
         />
 
-        <AnimatePresence initial={false}>
+        {/* popLayout takes the leaving group out of flow immediately, so the
+            controls that remain glide to their new places instead of jumping.
+            Never animate width here — animating to `auto` measures wider than
+            the row and flashes a horizontal scrollbar. */}
+        <AnimatePresence initial={false} mode="popLayout">
           {mode === "cpu" && (
             <motion.div
               key="cpu-options"
-              className="header-buttons"
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "auto" }}
-              exit={{ opacity: 0, width: 0 }}
-              transition={{ duration: 0.2 }}
+              className="cpu-options"
+              initial={{ opacity: 0, scale: 0.92, y: -8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: -8 }}
+              transition={MARK_SPRING}
             >
               <SegmentedToggle
                 layoutId="side-thumb"

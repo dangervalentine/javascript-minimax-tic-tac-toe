@@ -14,10 +14,14 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   width: 100%;
   border-bottom: 1px solid var(--nowl-border);
   background-color: var(--nowl-bg-elevated);
   text-align: left;
+  /* `clip` rather than `hidden`: it suppresses the scrollbar the layout
+     animations would otherwise flash without creating a scroll container. */
+  overflow-x: clip;
 }
 
 .app-info {
@@ -58,6 +62,14 @@ header {
 }
 
 .header-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cpu-options {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -109,19 +121,52 @@ header {
 
 /* ---- board ----------------------------------------------------------- */
 
+/* Header pinned to the top, board centred in whatever is left. dvh so mobile
+   browser chrome does not push the board out of view. */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
 .board-wrap {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 2vh;
+  padding: 2vh 0;
+}
+
+/* Reserves the result's space at all times so the centred board never shifts
+   when the game ends or restarts. */
+.result-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 5.5rem;
+}
+
+/* Mirrors the result slot above the board so the BOARD is centred in the
+   viewport, not the board-plus-result group (which would ride it high). */
+.board-wrap::before {
+  content: "";
+  min-height: 5.5rem;
+  flex: none;
 }
 
 .board {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  height: 65vh;
-  width: 65vh;
-  margin: 3vh auto 0;
+  /* The calc term is the header, the two reserved slots, the gaps and the
+     padding. Without it a 65vh board plus that chrome overflows the viewport
+     and raises a vertical scrollbar on shorter screens. */
+  height: min(65vh, 65vw, calc(100dvh - 330px));
+  width: min(65vh, 65vw, calc(100dvh - 330px));
+  flex: none;
   background: var(--nowl-bg-surface);
   border: 1px solid var(--nowl-border);
   border-radius: 14px;
@@ -339,19 +384,49 @@ header {
     gap: 10px;
   }
 
+  /* Reset stays on the top row beside the mode toggle; the CPU-only controls
+     take a full row of their own so nothing shuffles between rows when they
+     appear or leave. */
   .header-buttons {
-    flex-wrap: wrap;
     justify-content: flex-start;
+  }
+
+  .mode-toggle {
+    order: 1;
+  }
+
+  .reset-button {
+    order: 2;
+  }
+
+  .cpu-options {
+    order: 3;
+    flex-basis: 100%;
   }
 
   .title {
     font-size: 1.4rem;
   }
 
+  .board-wrap {
+    gap: 1.5vh;
+  }
+
+  /* Slot and its mirror stay equal so the board itself remains centred. */
+  .result-slot,
+  .board-wrap::before {
+    min-height: 4.5rem;
+  }
+
+  /* Larger subtraction than desktop: the header wraps to two or three rows at
+     these widths, so there is less height left for the board. */
   .board {
-    margin: 4vh auto;
-    height: 90vw;
-    width: 90vw;
+    height: min(92vw, calc(100dvh - 395px));
+    width: min(92vw, calc(100dvh - 395px));
+  }
+
+  .result-text {
+    font-size: 2rem;
   }
 }
 

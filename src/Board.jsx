@@ -48,12 +48,16 @@ export default function Board({
         ))}
         <WinLine pieces={winningPieces} />
       </motion.div>
-      <Result
-        winner={winner}
-        isPlaying={isPlaying}
-        mode={mode}
-        humanPlayer={humanPlayer}
-      />
+      {/* The slot always occupies its space, so the board does not jump when
+          the result appears or leaves. On mobile it sits above the board. */}
+      <div className="result-slot">
+        <Result
+          winner={winner}
+          isPlaying={isPlaying}
+          mode={mode}
+          humanPlayer={humanPlayer}
+        />
+      </div>
     </div>
   );
 }

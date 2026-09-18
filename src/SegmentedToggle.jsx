@@ -6,15 +6,23 @@ import { MARK_SPRING } from "./motion";
 // One segmented control. The sliding thumb is a `layoutId` element, which is
 // what makes it travel between segments instead of blinking out and back in.
 // Each instance needs its own layoutId or the thumbs animate into each other.
+// `layout` on the root lets the control glide when a sibling appears or leaves.
 export default function SegmentedToggle({
   options,
   value,
   onChange,
   layoutId,
-  ariaLabel
+  ariaLabel,
+  className = ""
 }) {
   return (
-    <div className="segmented" role="group" aria-label={ariaLabel}>
+    <motion.div
+      layout
+      transition={MARK_SPRING}
+      className={`segmented ${className}`}
+      role="group"
+      aria-label={ariaLabel}
+    >
       {options.map(option => {
         const on = option.value === value;
         return (
@@ -38,6 +46,6 @@ export default function SegmentedToggle({
           </button>
         );
       })}
-    </div>
+    </motion.div>
   );
 }
