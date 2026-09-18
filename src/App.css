@@ -1,54 +1,54 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-}
-
 html {
   height: 100%;
 }
 
 body {
-  background: #121314;
-  color: white;
+  background: var(--nowl-bg-base);
+  color: var(--nowl-text);
 }
 
+/* ---- header ---------------------------------------------------------- */
+
 header {
-  padding: 5px 5px 10px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-direction: row;
   width: 100%;
-  border-bottom: 1px solid gray;
-  background-color: #1a1b1c;
+  border-bottom: 1px solid var(--nowl-border);
+  background-color: var(--nowl-bg-elevated);
   text-align: left;
 }
 
 .app-info {
   display: flex;
+  align-items: center;
 }
 
 .title {
   font-size: 1.75rem;
+  color: var(--nowl-white);
+  letter-spacing: 0.01em;
 }
 
 .credit {
   font-size: 0.7rem;
-  color: silver;
+  color: var(--nowl-text-muted);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 .credit:hover {
-  color: whitesmoke;
+  color: var(--nowl-text-secondary);
 }
 
 .header-text {
-  margin: 0 10px;
+  margin: 0 12px;
 }
 
 .header-text p {
-  margin-block-start: 0em;
-  margin-block-end: 0em;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .logo {
@@ -59,189 +59,304 @@ header {
 
 .header-buttons {
   display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
+/* Shows whose turn it is; pulses amber while the CPU is thinking. */
+.turn-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-left: 4px;
+  align-self: center;
+  flex: none;
+}
+
+.turn-dot.x {
+  background: var(--nowl-x);
+}
+
+.turn-dot.o {
+  background: var(--nowl-o);
+}
+
+.turn-dot.thinking {
+  background: var(--nowl-status-playing);
+}
+
+/* ---- buttons --------------------------------------------------------- */
 
 .reset-button {
-  border-radius: 5px;
-  border: 1px solid white;
-  font-size: 1.5rem;
-  padding: 2px 10px;
-  height: 50px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--nowl-secondary-dark);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  padding: 0 16px;
+  height: 44px;
   background-color: transparent;
-  color: white;
-  display: inline-block;
+  color: var(--nowl-text-secondary);
   cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.difficulty-button {
-  cursor: pointer;
-  border-radius: 5px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  background-color: transparent;
-  border: 1px solid white;
-  margin-right: 5px;
-  width: 50px;
-  overflow: hidden;
+.reset-button:hover,
+.reset-button:focus-visible {
+  border-color: var(--nowl-primary);
+  color: var(--nowl-text);
+  outline: none;
 }
 
-.difficulty-button div {
+/* ---- board ----------------------------------------------------------- */
+
+.board-wrap {
   display: flex;
-  align-content: center;
-  justify-content: center;
-  background-color: transparent;
-  height: 48px;
-  background-image: url(./difficulty.svg);
-  width: 96px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .board {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   height: 65vh;
   width: 65vh;
-  margin: 2% auto 0;
+  margin: 3vh auto 0;
+  background: var(--nowl-bg-surface);
+  border: 1px solid var(--nowl-border);
+  border-radius: 14px;
 }
 
 .cell {
   position: relative;
-  border: 3px solid #aaa;
-  height: 33.33%;
-  width: 33.33%;
-  font-size: 15vh;
+  height: 33.333%;
+  width: 33.333%;
   user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.cell.DR {
-  background: linear-gradient(
-    to top left,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) calc(50% - 4px),
-    rgba(70%, 70%, 70%, 1) calc(50% - 3px),
-    rgba(70%, 70%, 70%, 1) 50%,
-    rgba(70%, 70%, 70%, 1) calc(50% + 3px),
-    rgba(0, 0, 0, 0) calc(50% + 4px),
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-.cell.DL {
-  background: linear-gradient(
-    to top right,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) calc(50% - 4px),
-    rgba(70%, 70%, 70%, 1) calc(50% - 3px),
-    rgba(70%, 70%, 70%, 1) 50%,
-    rgba(70%, 70%, 70%, 1) calc(50% + 3px),
-    rgba(0, 0, 0, 0) calc(50% + 4px),
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-.cell.H {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) calc(50% - 4px),
-    rgba(70%, 70%, 70%, 1) calc(50% - 3px),
-    rgba(70%, 70%, 70%, 1) 50%,
-    rgba(70%, 70%, 70%, 1) calc(50% + 3px),
-    rgba(0, 0, 0, 0) calc(50% + 4px),
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-.cell.V {
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0) calc(50% - 4px),
-    rgba(70%, 70%, 70%, 1) calc(50% - 3px),
-    rgba(70%, 70%, 70%, 1) 50%,
-    rgba(70%, 70%, 70%, 1) calc(50% + 3px),
-    rgba(0, 0, 0, 0) calc(50% + 4px),
-    rgba(0, 0, 0, 0) 100%
-  );
-}
-
-.cell:nth-of-type(3n + 1) {
-  border-left: none;
-}
-
-.cell:nth-of-type(1),
-.cell:nth-of-type(2),
-.cell:nth-of-type(3) {
-  border-top: none;
-}
-
-.cell:nth-of-type(3n + 3) {
-  border-right: none;
-}
-
-.cell:nth-of-type(7),
-.cell:nth-of-type(8),
-.cell:nth-of-type(9) {
-  border-bottom: none;
-}
-
-.board.active .cell:hover {
-  background: rgba(255, 255, 255, 0.05);
+.board.active .cell.interactive:hover {
   cursor: pointer;
 }
 
-.cell span {
-  z-index: -1;
+.grid-lines,
+.win-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-.cell span.ex {
-  position: absolute;
-  height: 50%;
-  width: 50%;
-  background-image: url(./ex.svg);
-  background-size: cover;
+/* Stroke widths are in viewBox units (0-100) and scale with the board.
+   Do NOT add vector-effect: non-scaling-stroke here — it computes dashes in
+   screen units, which breaks motion's pathLength normalisation and renders
+   the lines as fragments. */
+.grid-lines line {
+  stroke: var(--nowl-grid);
+  stroke-width: 0.4;
+  stroke-linecap: round;
 }
 
-.cell span.oh {
-  position: absolute;
-  height: 50%;
-  width: 50%;
-  background-image: url(./oh.svg);
-  background-size: cover;
+.win-line line {
+  stroke: var(--nowl-text);
+  stroke-width: 0.8;
+  stroke-linecap: round;
 }
+
+/* ---- marks ----------------------------------------------------------- */
+
+.mark {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  display: block;
+  pointer-events: none;
+}
+
+.mark.x {
+  color: var(--nowl-x);
+}
+
+.mark.o {
+  color: var(--nowl-o);
+}
+
+.glyph {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.glyph line,
+.glyph circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 11;
+  stroke-linecap: round;
+}
+
+/* A second copy of the glyph rather than a filter: drop-shadow, so the shadow
+   matches the piece's shape AND stays a separate element that can animate on
+   its own curve — which is what reads as depth when the piece springs up. */
+.mark-shadow {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  display: block;
+  color: var(--nowl-bg-floor);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.ghost {
+  display: none;
+}
+
+@media (hover: hover) {
+  .ghost {
+    display: block;
+  }
+}
+
+/* ---- result ---------------------------------------------------------- */
 
 .result {
-  color: red;
   text-align: center;
-  width: 100%;
-  font-size: 4rem;
-  margin-top: 5%;
-  font-weight: 600;
+  margin-top: 2.5vh;
 }
+
+.result-text {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.result.x .result-text {
+  color: var(--nowl-x);
+}
+
+.result.o .result-text {
+  color: var(--nowl-o);
+}
+
+.result.muted .result-text {
+  color: var(--nowl-text-muted);
+}
+
+.result-hint {
+  font-size: 0.8rem;
+  color: var(--nowl-text-muted);
+  margin: 6px 0 0;
+  letter-spacing: 0.04em;
+}
+
+/* ---- segmented toggles ----------------------------------------------- */
+
+.segmented {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 44px;
+  padding: 3px;
+  border: 1px solid var(--nowl-secondary-dark);
+  border-radius: 8px;
+  background: transparent;
+  transition: border-color 0.15s ease;
+  flex: none;
+}
+
+.segmented:hover,
+.segmented:focus-within {
+  border-color: var(--nowl-primary);
+}
+
+.segment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.segment:focus-visible {
+  outline: 1px solid var(--nowl-primary);
+  outline-offset: -1px;
+}
+
+.segment-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: var(--nowl-secondary-dark);
+}
+
+.segment-label {
+  position: relative;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--nowl-text-muted);
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.segment.on .segment-label {
+  color: var(--nowl-text);
+}
+
+.segment.on .segment-label.x {
+  color: var(--nowl-x);
+}
+
+.segment.on .segment-label.o {
+  color: var(--nowl-o);
+}
+
+/* ---- responsive ------------------------------------------------------ */
 
 @media (max-width: 768px) {
   html {
-    overflow: scroll;
     overflow-x: hidden;
   }
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+
+  /* Three toggles plus reset will not fit beside the title on a phone, so the
+     header becomes two stacked rows and the controls wrap. */
+  header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
-  ::-webkit-scrollbar-thumb {
-    background: #ff0000;
+
+  .header-buttons {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .title {
+    font-size: 1.4rem;
   }
 
   .board {
-    margin: 10% auto;
+    margin: 4vh auto;
     height: 90vw;
     width: 90vw;
   }
+}
 
-  header {
-    justify-content: space-between;
-  }
+/* The title must never wrap mid-name, at any width. */
+.title,
+.credit p {
+  white-space: nowrap;
 }

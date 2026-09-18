@@ -1,0 +1,46 @@
+/* Night Owl — dark. The single source of colour for this app.
+   Nothing animates colour, so these values never need a JS twin. */
+:root {
+  /* primary / secondary */
+  --nowl-primary-light: #afc6ff;
+  --nowl-primary: #82aaff;
+  --nowl-primary-dark: #4976a1;
+  --nowl-secondary-light: #a3b7c7;
+  --nowl-secondary: #8da0af;
+  --nowl-secondary-dark: #2a3f51;
+
+  /* accents */
+  --nowl-cyan: #7fdbca;
+  --nowl-coral: #ffab70;
+  --nowl-green: #c3e88d;
+  --nowl-pink: #f07178;
+  --nowl-yellow: #ffcb6b;
+  --nowl-purple: #c792ea;
+
+  /* status */
+  --nowl-status-playing: #d4a44e;
+
+  /* neutrals */
+  --nowl-white: #ffffff;
+  --nowl-light-gray: #d6deeb;
+  --nowl-gray: #637777;
+  --nowl-dark-gray: #1d3b53;
+
+  /* backgrounds */
+  --nowl-bg-elevated: #132a3e;
+  --nowl-bg-surface: #0a1e30;
+  --nowl-bg-base: #011627;
+  --nowl-bg-floor: #010e18;
+  --nowl-scrim: rgba(1, 22, 39, 0.6);
+
+  /* text */
+  --nowl-text: #d6deeb;
+  --nowl-text-secondary: #9db2c0;
+  --nowl-text-muted: #7e8e94;
+
+  /* semantic roles used by this app */
+  --nowl-x: var(--nowl-cyan);
+  --nowl-o: var(--nowl-coral);
+  --nowl-grid: #2c4f6b;
+  --nowl-border: var(--nowl-dark-gray);
+}
