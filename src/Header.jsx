@@ -51,7 +51,7 @@ export default function Header({
             rel="noopener noreferrer"
             href="https://github.com/dangervalentine"
           >
-            <p>by victor d. johnson</p>
+            <p>by Danger Valentine</p>
           </a>
         </div>
         <motion.span
