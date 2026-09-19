@@ -32,6 +32,8 @@
   --nowl-bg-base: #011627;
   --nowl-bg-floor: #010e18;
   --nowl-scrim: rgba(1, 22, 39, 0.6);
+  /* --nowl-bg-elevated at 82%, for the result card that sits over the board. */
+  --nowl-bg-elevated-translucent: rgba(19, 42, 62, 0.82);
 
   /* text */
   --nowl-text: #d6deeb;

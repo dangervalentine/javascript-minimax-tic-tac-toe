@@ -20,21 +20,25 @@ function describe(winner, mode, humanPlayer) {
 export default function Result({ winner, isPlaying, mode, humanPlayer }) {
   const outcome = isPlaying ? null : describe(winner, mode, humanPlayer);
 
+  // The overlay is always mounted and always transparent to pointer events, so
+  // the click that dismisses the result still reaches the board underneath.
   return (
-    <AnimatePresence>
-      {outcome && (
-        <motion.div
-          key="result"
-          className={`result ${outcome.tone}`}
-          initial={{ opacity: 0, y: 12, scale: 0.94 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -8, transition: { duration: 0.2 } }}
-          transition={RESULT_SPRING}
-        >
-          <p className="result-text">{outcome.text}</p>
-          <p className="result-hint">click the board to play again</p>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className="result-overlay">
+      <AnimatePresence>
+        {outcome && (
+          <motion.div
+            key="result"
+            className={`result ${outcome.tone}`}
+            initial={{ opacity: 0, y: 12, scale: 0.94 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, transition: { duration: 0.2 } }}
+            transition={RESULT_SPRING}
+          >
+            <p className="result-text">{outcome.text}</p>
+            <p className="result-hint">click the board to play again</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

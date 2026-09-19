@@ -130,42 +130,26 @@ header {
   min-height: 100dvh;
 }
 
+/* The result overlays the board, so nothing below the board needs reserving.
+   The extra bottom padding is the fixed attribution badge's strip: the board
+   keeps out of it instead of being drawn underneath it. */
 .board-wrap {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2vh;
-  padding: 2vh 0;
-}
-
-/* Reserves the result's space at all times so the centred board never shifts
-   when the game ends or restarts. */
-.result-slot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 5.5rem;
-}
-
-/* Mirrors the result slot above the board so the BOARD is centred in the
-   viewport, not the board-plus-result group (which would ride it high). */
-.board-wrap::before {
-  content: "";
-  min-height: 5.5rem;
-  flex: none;
+  padding: 2vh 0 calc(2vh + 3.25rem);
 }
 
 .board {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  /* The calc term is the header, the two reserved slots, the gaps and the
-     padding. Without it a 65vh board plus that chrome overflows the viewport
-     and raises a vertical scrollbar on shorter screens. */
-  height: min(65vh, 65vw, calc(100dvh - 330px));
-  width: min(65vh, 65vw, calc(100dvh - 330px));
+  /* The calc term is the header, the wrapper padding and the badge strip.
+     Without it a 65vh board plus that chrome overflows the viewport and
+     raises a vertical scrollbar on shorter screens. */
+  height: min(65vh, 65vw, calc(100dvh - 175px));
+  width: min(65vh, 65vw, calc(100dvh - 175px));
   flex: none;
   background: var(--nowl-bg-surface);
   border: 1px solid var(--nowl-border);
@@ -272,15 +256,38 @@ header {
 
 /* ---- result ---------------------------------------------------------- */
 
-.result {
-  text-align: center;
-  margin-top: 2.5vh;
+/* Fills the board and centres the card on it. Always mounted so nothing
+   reflows when the result arrives or leaves, and transparent to the pointer
+   so the click that starts the next game still lands on the board. */
+.result-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
+/* Translucent and blurred rather than opaque: the finished position still
+   reads through it, which is what keeps this an overlay and not a modal. */
+.result {
+  text-align: center;
+  padding: 0.9rem 1.5rem 1rem;
+  border: 1px solid var(--nowl-border);
+  border-radius: 14px;
+  background: var(--nowl-bg-elevated-translucent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 12px 32px rgba(1, 14, 24, 0.55);
+}
+
+/* Scales with the viewport so the longest outcome ("Computer wins") stays on
+   one line inside the board at every width. */
 .result-text {
-  font-size: 2.5rem;
+  font-size: clamp(1.4rem, 8vw, 2.5rem);
   font-weight: 600;
   margin: 0;
+  white-space: nowrap;
 }
 
 .result.x .result-text {
@@ -408,25 +415,15 @@ header {
     font-size: 1.4rem;
   }
 
-  .board-wrap {
-    gap: 1.5vh;
-  }
-
-  /* Slot and its mirror stay equal so the board itself remains centred. */
-  .result-slot,
-  .board-wrap::before {
-    min-height: 4.5rem;
-  }
-
   /* Larger subtraction than desktop: the header wraps to two or three rows at
      these widths, so there is less height left for the board. */
   .board {
-    height: min(92vw, calc(100dvh - 395px));
-    width: min(92vw, calc(100dvh - 395px));
+    height: min(92vw, calc(100dvh - 270px));
+    width: min(92vw, calc(100dvh - 270px));
   }
 
-  .result-text {
-    font-size: 2rem;
+  .result {
+    padding: 0.8rem 1.2rem 0.9rem;
   }
 }
 

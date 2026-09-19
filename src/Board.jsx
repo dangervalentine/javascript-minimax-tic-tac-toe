@@ -47,17 +47,16 @@ export default function Board({
           />
         ))}
         <WinLine pieces={winningPieces} />
-      </motion.div>
-      {/* The slot always occupies its space, so the board does not jump when
-          the result appears or leaves. On mobile it sits above the board. */}
-      <div className="result-slot">
+        {/* Rendered inside the board so the message always lands on top of it.
+            Anywhere below the board is territory the fixed attribution badge
+            can cover once the viewport is short enough. */}
         <Result
           winner={winner}
           isPlaying={isPlaying}
           mode={mode}
           humanPlayer={humanPlayer}
         />
-      </div>
+      </motion.div>
     </div>
   );
 }
